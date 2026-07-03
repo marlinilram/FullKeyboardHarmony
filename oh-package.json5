@@ -1,0 +1,10 @@
+{
+  "name": "fullkeyboard-harmony",
+  "version": "1.0.0",
+  "description": "FullKeyboard HarmonyOS port",
+  "main": "",
+  "author": "",
+  "license": "Apache-2.0",
+  "modelVersion": "5.0.0",
+  "dependencies": {}
+}

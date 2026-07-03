@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "FullKeyboard HarmonyOS entry"
+    },
+    {
+      "name": "FullKeyboardAbility_desc",
+      "value": "FullKeyboard input method"
+    },
+    {
+      "name": "FullKeyboardAbility_label",
+      "value": "Full Keyboard"
+    }
+  ]
+}

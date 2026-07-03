@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "keyboard_height_portrait",
+      "value": "260vp"
+    },
+    {
+      "name": "keyboard_height_landscape",
+      "value": "180vp"
+    },
+    {
+      "name": "keyboard_key_margin",
+      "value": "2vp"
+    },
+    {
+      "name": "keyboard_key_text_size",
+      "value": "14fp"
+    },
+    {
+      "name": "keyboard_toolbar_height",
+      "value": "28vp"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "fullkeyboard-harmony",
+  "version": "1.0.0",
+  "description": "FullKeyboard HarmonyOS port",
+  "private": true,
+  "devDependencies": {
+    "@ohos/hvigor": "5.2.2",
+    "@ohos/hvigor-ohos-plugin": "5.2.2"
+  }
+}

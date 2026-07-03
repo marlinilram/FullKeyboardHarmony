@@ -1,0 +1,22 @@
+# Build outputs
+entry/build/
+build/
+
+# Dependencies
+node_modules/
+entry/oh_modules/
+
+# Local signing / SDK config
+local.properties
+signature/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+
+# Hvigor caches / logs
+.hvigor/
+entry/.preview/

@@ -1,0 +1,27 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:entry_desc",
+    "mainElement": "FullKeyboardAbility",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "extensionAbilities": [
+      {
+        "name": "FullKeyboardAbility",
+        "srcEntry": "./ets/ServiceExtAbility/FullKeyboardAbility.ets",
+        "description": "$string:FullKeyboardAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:FullKeyboardAbility_label",
+        "type": "inputMethod",
+        "exported": true
+      }
+    ],
+    "abilities": [],
+    "requestPermissions": []
+  }
+}

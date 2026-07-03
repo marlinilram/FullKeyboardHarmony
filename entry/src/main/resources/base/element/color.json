@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "colorBackground",
+      "value": "#80FFFFFF"
+    },
+    {
+      "name": "colorButton",
+      "value": "#A0BFBFBF"
+    },
+    {
+      "name": "colorButtonPressed",
+      "value": "#A07F7F7F"
+    },
+    {
+      "name": "colorText",
+      "value": "#FF000000"
+    },
+    {
+      "name": "colorAccent",
+      "value": "#FF1976D2"
+    }
+  ]
+}
