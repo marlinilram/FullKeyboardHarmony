@@ -45,6 +45,8 @@ export class FullKeyboardController {
   private physicalAlt: boolean = false;
 
   private repeatTimer: number = -1;
+  private repeatDelayMs: number = 400;
+  private repeatIntervalMs: number = 80;
   private lastKey: KeyDef | null = null;
   private physicalKeys: Set<number> = new Set();
 
@@ -249,17 +251,53 @@ export class FullKeyboardController {
     this.lastKey = null;
   }
 
+  private isRepeatableKey(kc: number): boolean {
+    return kc === 67 || kc === 112 || kc === 19 || kc === 20 || kc === 21 || kc === 22 || kc === 122 || kc === 123;
+  }
+
   private startRepeat(key: KeyDef): void {
+    if (!this.isRepeatableKey(key.keyCode)) {
+      return;
+    }
     this.clearRepeat();
-    this.repeatTimer = setInterval(() => {
-      this.executeKeyAction(key);
-    }, 80);
+    this.repeatTimer = setTimeout(() => {
+      this.repeatTimer = setInterval(() => {
+        this.executeKeyAction(key);
+      }, this.repeatIntervalMs);
+    }, this.repeatDelayMs);
   }
 
   private clearRepeat(): void {
     if (this.repeatTimer !== -1) {
+      clearTimeout(this.repeatTimer);
       clearInterval(this.repeatTimer);
       this.repeatTimer = -1;
+    }
+  }
+
+  private handleCtrlCombo(kc: number): boolean {
+    if (!this.ctrlActive || !this.inputClient) {
+      return false;
+    }
+    switch (kc) {
+      case 29: // A
+        this.inputClient.sendExtendAction(inputMethodEngine.ExtendAction.SELECT_ALL)
+          .catch((err: BusinessError) => this.logError('selectAll', err));
+        return true;
+      case 31: // C
+        this.inputClient.sendExtendAction(inputMethodEngine.ExtendAction.COPY)
+          .catch((err: BusinessError) => this.logError('copy', err));
+        return true;
+      case 50: // V
+        this.inputClient.sendExtendAction(inputMethodEngine.ExtendAction.PASTE)
+          .catch((err: BusinessError) => this.logError('paste', err));
+        return true;
+      case 52: // X
+        this.inputClient.sendExtendAction(inputMethodEngine.ExtendAction.CUT)
+          .catch((err: BusinessError) => this.logError('cut', err));
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -268,6 +306,10 @@ export class FullKeyboardController {
       return;
     }
     const kc = key.keyCode;
+
+    if (this.handleCtrlCombo(kc)) {
+      return;
+    }
 
     // Navigation / editing
     if (kc === 67) { // Android KEYCODE_DEL
@@ -414,6 +456,10 @@ export class FullKeyboardController {
         this.inputClient?.insertText(altChar);
         return true;
       }
+    }
+
+    if (this.handleCtrlCombo(code)) {
+      return true;
     }
 
     const value = this.getPhysicalKeyValue(code);
