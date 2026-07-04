@@ -101,10 +101,19 @@ struct KeyButton {
 
   private isActive(): boolean {
     if (this.keyDef.type === 'modifier') {
-      return keyboardController.isModifierActive(this.keyDef.keyCode);
+      const code = this.keyDef.keyCode;
+      if (code === 113 || code === 114) return this.ctrlActive;
+      if (code === 59 || code === 60) return this.shiftActive;
+      if (code === 57 || code === 58) return this.altActive;
+      if (code === 117 || code === 118) return this.metaActive;
+      return this.pressed;
     }
     if (this.keyDef.type === 'lock') {
-      return keyboardController.isLockActive(this.keyDef.keyCode);
+      const code = this.keyDef.keyCode;
+      if (code === 115) return this.capsLock;
+      if (code === 143) return this.numLock;
+      if (code === 116) return this.scrollLock;
+      return this.pressed;
     }
     return this.pressed;
   }
