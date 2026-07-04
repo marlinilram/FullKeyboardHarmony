@@ -5,6 +5,6 @@
   "private": true,
   "devDependencies": {
     "@ohos/hvigor": "6.24.3",
-    "@ohos/hvigor-ohos-plugin": "6.24.3"
+    "@ohos/hvigor-ohos-plugin": "6.26.1"
   }
 }
