@@ -47,7 +47,8 @@ FullKeyboardHarmony/entry/build/default/outputs/default/entry-default-unsigned.h
 
 ## 已知限制
 
-- 鸿蒙输入法框架没有提供向目标应用注入原始 `KeyEvent`/scanCode 的公开接口，因此远程桌面场景的原始按键无法 1:1 还原。当前实现通过 `InputClient.insertText` / `moveCursor` / `deleteBackward` 等接口完成文本与编辑操作。
+- 鸿蒙输入法框架没有提供向目标应用注入原始 `KeyEvent`/scanCode 的公开接口，因此远程桌面场景的原始按键无法 1:1 还原。
+- 当前实现通过 `InputClient.insertText` / `moveCursor` / `deleteBackward` / `sendExtendAction` 等接口完成文本与编辑操作；**Ctrl+字母（A/C/V/X 除外）会发送对应的 C0 控制字符**（如 Ctrl+B 发送 `0x02`），以便在 Web 终端 / tmux / xterm.js 等场景中使用。
 - 输出的是 **未签名 HAP**，需要在 DevEco Studio 或命令行中配置签名后才能在真机/模拟器上安装运行。
 - 悬浮/拖拽面板目前使用近似坐标计算，拖动体验有限。
 

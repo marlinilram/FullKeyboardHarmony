@@ -301,6 +301,22 @@ export class FullKeyboardController {
     }
   }
 
+  // For terminal scenarios (tmux, shell, xterm.js): Ctrl+Letter emits the
+  // corresponding C0 control character (Ctrl+A -> 0x01, ..., Ctrl+Z -> 0x1A).
+  // This is the best available workaround because HarmonyOS IME Kit does not
+  // expose an API to inject raw KeyEvent/scanCode into the target app.
+  private sendCtrlChar(kc: number): boolean {
+    if (!this.ctrlActive || !this.inputClient) {
+      return false;
+    }
+    if (kc >= 29 && kc <= 54) { // Android KEYCODE_A .. KEYCODE_Z
+      const ctrlChar = String.fromCharCode((kc - 29) + 1);
+      this.inputClient.insertText(ctrlChar);
+      return true;
+    }
+    return false;
+  }
+
   private executeKeyAction(key: KeyDef): void {
     if (!this.inputClient) {
       return;
@@ -308,6 +324,9 @@ export class FullKeyboardController {
     const kc = key.keyCode;
 
     if (this.handleCtrlCombo(kc)) {
+      return;
+    }
+    if (this.sendCtrlChar(kc)) {
       return;
     }
 
@@ -459,6 +478,9 @@ export class FullKeyboardController {
     }
 
     if (this.handleCtrlCombo(code)) {
+      return true;
+    }
+    if (this.sendCtrlChar(code)) {
       return true;
     }
 
