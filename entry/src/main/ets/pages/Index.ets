@@ -109,11 +109,15 @@ struct KeyButton {
     return this.pressed;
   }
 
+  private isModifierOrLockActive(): boolean {
+    return (this.keyDef.type === 'modifier' || this.keyDef.type === 'lock') && this.isActive();
+  }
+
   build() {
     Stack() {
       Text(this.keyDef.label)
         .fontSize(14)
-        .fontColor($r('app.color.colorText'))
+        .fontColor(this.isModifierOrLockActive() ? '#FFFFFFFF' : $r('app.color.colorText'))
         .fontWeight(FontWeight.Medium)
         .textAlign(TextAlign.Center)
         .maxLines(1)
@@ -121,7 +125,7 @@ struct KeyButton {
     }
     .height('100%')
     .layoutWeight(this.keyDef.weight)
-    .backgroundColor(this.isActive() ? $r('app.color.colorButtonPressed') : $r('app.color.colorButton'))
+    .backgroundColor(this.isModifierOrLockActive() ? $r('app.color.colorAccent') : (this.pressed ? $r('app.color.colorButtonPressed') : $r('app.color.colorButton')))
     .borderRadius(4)
     .onTouch((event: TouchEvent) => {
       switch (event.type) {

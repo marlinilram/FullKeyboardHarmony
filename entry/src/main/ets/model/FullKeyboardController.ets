@@ -322,63 +322,77 @@ export class FullKeyboardController {
       return;
     }
     const kc = key.keyCode;
+    const hadCtrl = this.ctrlActive;
 
     if (this.handleCtrlCombo(kc)) {
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (this.sendCtrlChar(kc)) {
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
 
     // Navigation / editing
     if (kc === 67) { // Android KEYCODE_DEL
       this.inputClient.deleteBackward(1);
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 112) { // Android KEYCODE_FORWARD_DEL
       this.inputClient.deleteForward(1);
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
-    if (kc === 19) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_UP); return; }
-    if (kc === 20) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_DOWN); return; }
-    if (kc === 21) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_LEFT); return; }
-    if (kc === 22) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_RIGHT); return; }
+    if (kc === 19) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_UP); this.releaseCtrlIfActive(hadCtrl); return; }
+    if (kc === 20) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_DOWN); this.releaseCtrlIfActive(hadCtrl); return; }
+    if (kc === 21) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_LEFT); this.releaseCtrlIfActive(hadCtrl); return; }
+    if (kc === 22) { this.inputClient.moveCursor(inputMethodEngine.Direction.CURSOR_RIGHT); this.releaseCtrlIfActive(hadCtrl); return; }
     if (kc === 122) { // HOME
       try { this.inputClient.selectByRange({ start: 0, end: 0 }); } catch (err) { this.logError('home', err as BusinessError); }
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 123) { // END
       try { this.inputClient.selectByRange({ start: 10000, end: 10000 }); } catch (err) { this.logError('end', err as BusinessError); }
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 61) { // TAB
       this.inputClient.insertText('\t');
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 66) { // ENTER
       if (this.editorAttribute) {
         this.inputClient.sendKeyFunction(this.editorAttribute.enterKeyType);
       }
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 62) { // SPACE
       this.inputClient.insertText(' ');
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 111) { // ESC
       this.kbController?.hide();
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 204) { // LANGUAGE_SWITCH
       // Framework does not expose a public switch API from InputMethodAbility.
       // Hide keyboard so the user can pick another input method.
       this.kbController?.hide();
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if (kc === 82) { // MENU
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
     if ((kc >= 24 && kc <= 25) || kc === 164) { // volume / mute - ignore
+      this.releaseCtrlIfActive(hadCtrl);
       return;
     }
 
@@ -387,6 +401,21 @@ export class FullKeyboardController {
     if (text.length > 0) {
       this.inputClient.insertText(text);
     }
+    this.releaseCtrlIfActive(hadCtrl);
+  }
+
+  private releaseCtrlIfActive(hadCtrl: boolean): void {
+    if (!hadCtrl || !this.ctrlActive) {
+      return;
+    }
+    // Do not release Ctrl while a physical Ctrl key is still held.
+    const physicalCtrlHeld = this.physicalKeys.has(KeyCode.KEYCODE_CTRL_LEFT) ||
+      this.physicalKeys.has(KeyCode.KEYCODE_CTRL_RIGHT);
+    if (physicalCtrlHeld) {
+      return;
+    }
+    this.ctrlActive = false;
+    this.refreshModifierStorage();
   }
 
   private resolveText(key: KeyDef): string {
@@ -468,30 +497,38 @@ export class FullKeyboardController {
       return false;
     }
 
+    const hadStickyCtrl = this.ctrlActive;
+
     // When physical Alt is held, try to output the alternate character and consume it.
     if (this.physicalAlt) {
       const altChar = this.getPhysicalAltChar(code);
       if (altChar) {
         this.inputClient?.insertText(altChar);
+        this.releaseCtrlIfActive(hadStickyCtrl);
         return true;
       }
     }
 
     if (this.handleCtrlCombo(code)) {
+      this.releaseCtrlIfActive(hadStickyCtrl);
       return true;
     }
     if (this.sendCtrlChar(code)) {
+      this.releaseCtrlIfActive(hadStickyCtrl);
       return true;
     }
 
     const value = this.getPhysicalKeyValue(code);
     if (value === '') {
+      this.releaseCtrlIfActive(hadStickyCtrl);
       return false;
     }
     if (this.processPhysicalFunction(code)) {
+      this.releaseCtrlIfActive(hadStickyCtrl);
       return true;
     }
     this.inputClient?.insertText(value);
+    this.releaseCtrlIfActive(hadStickyCtrl);
     return true;
   }
 
