@@ -26,7 +26,7 @@ FullKeyboardHarmony/
 ## 应用包名
 
 ```
-com.marlinilram.fullkeyboard
+com.marlinilram.devkeyboard
 ```
 
 包名符合华为应用分发规范（三段式、无保留字符、以英文字母开头）。

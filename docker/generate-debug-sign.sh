@@ -71,7 +71,7 @@ profile = {
     "bundle-info": {
         "developer-id": "OpenHarmony",
         "development-certificate": leaf,
-        "bundle-name": "com.marlinilram.fullkeyboard",
+        "bundle-name": "com.marlinilram.devkeyboard",
         "apl": "normal",
         "app-feature": "hos_normal_app"
     },
