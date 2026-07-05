@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "ime.fullkeyboard.harmony",
+    "bundleName": "com.marlinilram.fullkeyboard",
     "vendor": "fullkeyboard",
     "versionCode": 1,
     "versionName": "1.0.0",

@@ -4,15 +4,7 @@
       {
         "name": "default",
         "type": "HarmonyOS",
-        "material": {
-          "certpath": "/Users/linma/.ohos/config/default_FullKeyboardHarmony_kab213ezb6EPVnCpVdmBXh1vb9IJGoiG7MY2acD1fh4=.cer",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B47A5329E9D35145A3652B26C3E1CDA78DD1029390A76AAC8A62E0A72D6C0DF858C8A4D1E57918A",
-          "profile": "/Users/linma/.ohos/config/default_FullKeyboardHarmony_kab213ezb6EPVnCpVdmBXh1vb9IJGoiG7MY2acD1fh4=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/linma/.ohos/config/default_FullKeyboardHarmony_kab213ezb6EPVnCpVdmBXh1vb9IJGoiG7MY2acD1fh4=.p12",
-          "storePassword": "0000001BF56C6A12BEF31B94D6CA73E71AD0061D044ED8EEA490A3C9F9B767A2B4B6FB5643E667C9EA8CCE"
-        }
+        "material": {}
       }
     ],
     "products": [
