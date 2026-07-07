@@ -5,7 +5,7 @@
     "description": "$string:entry_desc",
     "mainElement": "FullKeyboardAbility",
     "deviceTypes": [
-      "default"
+      "phone"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
