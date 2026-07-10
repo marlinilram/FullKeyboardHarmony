@@ -31,7 +31,13 @@
         "startWindowIcon": "$media:icon",
         "startWindowBackground": "$color:colorBackground",
         "exported": true,
-        "launchType": "standard"
+        "launchType": "standard",
+        "skills": [
+          {
+            "entities": ["entity.system.home"],
+            "actions": ["action.system.home"]
+          }
+        ]
       }
     ],
     "requestPermissions": []
