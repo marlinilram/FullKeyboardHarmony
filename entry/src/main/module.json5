@@ -3,7 +3,7 @@
     "name": "entry",
     "type": "entry",
     "description": "$string:entry_desc",
-    "mainElement": "FullKeyboardAbility",
+    "mainElement": "EntryAbility",
     "deviceTypes": [
       "phone"
     ],
@@ -21,7 +21,19 @@
         "exported": true
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "description": "$string:entry_desc",
+        "icon": "$media:icon",
+        "label": "$string:FullKeyboardAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "#80FFFFFF",
+        "exported": true,
+        "launchType": "standard"
+      }
+    ],
     "requestPermissions": []
   }
 }
