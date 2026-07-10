@@ -1,5 +1,6 @@
 import InputMethodExtensionContext from '@ohos.InputMethodExtensionContext';
 import inputMethodEngine from '@ohos.inputMethodEngine';
+import inputMethod from '@ohos.inputMethod';
 import display from '@ohos.display';
 import { KeyCode } from '@ohos.multimodalInput.keyCode';
 import { BusinessError } from '@ohos.base';
@@ -357,10 +358,13 @@ export class FullKeyboardController {
     else if (kc === 111) { // ESC
       this.kbController?.hide();
     }
-    else if (kc === 204) { // LANGUAGE_SWITCH
-      // Framework does not expose a public switch API from InputMethodAbility.
-      // Hide keyboard so the user can pick another input method.
-      this.kbController?.hide();
+    else if (kc === 204) { // LANGUAGE_SWITCH / 地球键：显示输入法选择对话框
+      this.showInputMethodPicker();
+    }
+    else if (kc >= 131 && kc <= 142) { // F1-F12
+      // HarmonyOS IME Kit does not expose an API to inject raw function keys.
+      // Consume the event to avoid inserting "F1".."F12" literal text.
+      // TODO: implement real function-key semantics when the framework supports it.
     }
     else if (kc === 82) { // MENU
       // no-op
@@ -402,6 +406,20 @@ export class FullKeyboardController {
 
   private releaseCtrlIfActive(hadCtrl: boolean): void {
     this.releaseModifierIfActive('ctrl', hadCtrl);
+  }
+
+  private showInputMethodPicker(): void {
+    try {
+      inputMethod.getSetting().displayOptionalInputMethod()
+        .then(() => {
+          console.info(TAG, 'displayed input method picker');
+        })
+        .catch((err: BusinessError) => {
+          this.logError('displayOptionalInputMethod', err);
+        });
+    } catch (err) {
+      this.logError('displayOptionalInputMethod', err as BusinessError);
+    }
   }
 
   private resolveText(key: KeyDef): string {
@@ -501,6 +519,20 @@ export class FullKeyboardController {
       return true;
     }
     if (this.sendCtrlChar(code)) {
+      this.releaseStickyModifiers(hadStickyCtrl, hadStickyShift);
+      return true;
+    }
+
+    // Function keys: consume without inserting text. The framework does not
+    // expose an API to inject raw function keys from an IME.
+    if (code >= KeyCode.KEYCODE_F1 && code <= KeyCode.KEYCODE_F12) {
+      this.releaseStickyModifiers(hadStickyCtrl, hadStickyShift);
+      return true;
+    }
+
+    // Language switch key on a physical keyboard.
+    if (code === 204) {
+      this.showInputMethodPicker();
       this.releaseStickyModifiers(hadStickyCtrl, hadStickyShift);
       return true;
     }
