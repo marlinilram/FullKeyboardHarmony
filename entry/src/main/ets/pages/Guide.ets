@@ -1,4 +1,5 @@
 import common from '@ohos.app.ability.common';
+import Want from '@ohos.app.ability.Want';
 import { BusinessError } from '@ohos.base';
 
 @Entry
@@ -7,7 +8,7 @@ struct Guide {
   private context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
 
   private openInputMethodSettings(): void {
-    const want = {
+    const want: Want = {
       bundleName: 'com.huawei.hmos.settings',
       abilityName: 'com.huawei.hmos.settings.MainAbility',
       uri: 'set_input'
