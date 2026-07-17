@@ -4,7 +4,15 @@
       {
         "name": "default",
         "type": "HarmonyOS",
-        "material": {}
+        "material": {
+          "storeFile": "/Users/linma/DevEcoStudioProjects/harmony_dev.p12",
+          "storePassword": "0000001A7287CE21DD27687FBDF0F35B1815D572469EAC846E03FB9F2E522B3178D7FD323F6E0A3338AA",
+          "keyAlias": "harmony_dev",
+          "keyPassword": "0000001ABB45A9E1B44925EAA0758420CCB790D5E5D080694CDC1AFD2974409FEC4420047C90BC0C54A9",
+          "signAlg": "SHA256withECDSA",
+          "profile": "/Users/linma/DevEcoStudioProjects/devkeyboardRelease.p7b",
+          "certpath": "/Users/linma/DevEcoStudioProjects/harmony_dev.cer"
+        }
       }
     ],
     "products": [
@@ -12,8 +20,8 @@
         "name": "default",
         "signingConfig": "default",
         "compileSdkVersion": "6.1.1(24)",
-        "compatibleSdkVersion": "6.1.1(24)",
-        "targetSdkVersion": "6.1.1(24)",
+        "compatibleSdkVersion": "6.0.0(20)",
+        "targetSdkVersion": "6.0.0(20)",
         "runtimeOS": "HarmonyOS"
       }
     ],
