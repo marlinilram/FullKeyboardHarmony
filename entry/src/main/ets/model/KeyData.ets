@@ -11,27 +11,13 @@ export type KeyRow = KeyDef[];
 
 export const PORTRAIT_LAYOUT: KeyRow[] = [
   [
-    { label: 'F9', keyCode: 139, scanCode: 67, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F10', keyCode: 140, scanCode: 68, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F11', keyCode: 141, scanCode: 87, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F12', keyCode: 142, scanCode: 88, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'Esc', keyCode: 111, scanCode: 1, weight: 1.0, modifiers: '', type: 'normal' },
     { label: 'PrtSc', keyCode: 120, scanCode: 99, weight: 1.0, modifiers: '', type: 'normal' },
     { label: 'ScrLk', keyCode: 116, scanCode: 70, weight: 1.0, modifiers: '', type: 'lock' },
     { label: 'Pause', keyCode: 121, scanCode: 119, weight: 1.0, modifiers: '', type: 'normal' },
     { label: 'PgUp', keyCode: 92, scanCode: 104, weight: 1.0, modifiers: '', type: 'normal' },
-  ],
-  [
-    { label: 'Esc', keyCode: 111, scanCode: 1, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F1', keyCode: 131, scanCode: 59, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F2', keyCode: 132, scanCode: 60, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F3', keyCode: 133, scanCode: 61, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F4', keyCode: 134, scanCode: 62, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F5', keyCode: 135, scanCode: 63, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F6', keyCode: 136, scanCode: 64, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F7', keyCode: 137, scanCode: 65, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F8', keyCode: 138, scanCode: 66, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: '🌐', keyCode: 204, scanCode: 368, weight: 1.0, modifiers: '', type: 'switch' },
     { label: 'PgDn', keyCode: 93, scanCode: 109, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'Fn', keyCode: 205, scanCode: 0, weight: 1.0, modifiers: '', type: 'switch' },
   ],
   [
     { label: 'Caps', keyCode: 115, scanCode: 58, weight: 1.0, modifiers: '', type: 'lock' },
@@ -111,6 +97,7 @@ export const PORTRAIT_LAYOUT: KeyRow[] = [
   [
     { label: '↹', keyCode: 61, scanCode: 15, weight: 1.0, modifiers: '', type: 'normal' },
     { label: 'Ctrl', keyCode: 113, scanCode: 29, weight: 1.0, modifiers: '', type: 'modifier' },
+    { label: '🌐', keyCode: 204, scanCode: 368, weight: 1.0, modifiers: '', type: 'switch' },
     { label: ' ', keyCode: 62, scanCode: 57, weight: 5.0, modifiers: '', type: 'space' },
     { label: '←', keyCode: 21, scanCode: 105, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '↓', keyCode: 20, scanCode: 108, weight: 1.0, modifiers: '', type: 'normal' },
@@ -132,18 +119,7 @@ export const LANDSCAPE_LAYOUT: KeyRow[] = [
     { label: '9 (', keyCode: 16, scanCode: 10, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '0 )', keyCode: 7, scanCode: 11, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '` ~', keyCode: 68, scanCode: 41, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F1', keyCode: 131, scanCode: 59, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F2', keyCode: 132, scanCode: 60, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F3', keyCode: 133, scanCode: 61, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F4', keyCode: 134, scanCode: 62, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F5', keyCode: 135, scanCode: 63, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F6', keyCode: 136, scanCode: 64, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F7', keyCode: 137, scanCode: 65, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F8', keyCode: 138, scanCode: 66, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F9', keyCode: 139, scanCode: 67, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F10', keyCode: 140, scanCode: 68, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F11', keyCode: 141, scanCode: 87, weight: 1.0, modifiers: '', type: 'normal' },
-    { label: 'F12', keyCode: 142, scanCode: 88, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'Fn', keyCode: 205, scanCode: 0, weight: 1.0, modifiers: '', type: 'switch' },
   ],
   [
     { label: 'Caps', keyCode: 115, scanCode: 58, weight: 1.0, modifiers: '', type: 'lock' },
@@ -216,6 +192,31 @@ export const LANDSCAPE_LAYOUT: KeyRow[] = [
     { label: '←', keyCode: 21, scanCode: 105, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '↓', keyCode: 20, scanCode: 108, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '→', keyCode: 22, scanCode: 106, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: '⏎', keyCode: 66, scanCode: 28, weight: 1.0, modifiers: '', type: 'normal' },
+  ],
+];
+
+export const FUNCTION_LAYOUT: KeyRow[] = [
+  [
+    { label: 'F1', keyCode: 131, scanCode: 59, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F2', keyCode: 132, scanCode: 60, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F3', keyCode: 133, scanCode: 61, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F4', keyCode: 134, scanCode: 62, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F5', keyCode: 135, scanCode: 63, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F6', keyCode: 136, scanCode: 64, weight: 1.0, modifiers: '', type: 'normal' },
+  ],
+  [
+    { label: 'F7', keyCode: 137, scanCode: 65, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F8', keyCode: 138, scanCode: 66, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F9', keyCode: 139, scanCode: 67, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F10', keyCode: 140, scanCode: 68, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F11', keyCode: 141, scanCode: 87, weight: 1.0, modifiers: '', type: 'normal' },
+    { label: 'F12', keyCode: 142, scanCode: 88, weight: 1.0, modifiers: '', type: 'normal' },
+  ],
+  [
+    { label: 'Fn', keyCode: 205, scanCode: 0, weight: 1.0, modifiers: '', type: 'switch' },
+    { label: ' ', keyCode: 62, scanCode: 57, weight: 4.0, modifiers: '', type: 'space' },
+    { label: '⌫', keyCode: 67, scanCode: 14, weight: 1.0, modifiers: '', type: 'normal' },
     { label: '⏎', keyCode: 66, scanCode: 28, weight: 1.0, modifiers: '', type: 'normal' },
   ],
 ];

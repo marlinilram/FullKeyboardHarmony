@@ -50,6 +50,7 @@ export class FullKeyboardController {
   private repeatIntervalMs: number = 80;
   private lastKey: KeyDef | null = null;
   private physicalKeys: Set<number> = new Set();
+  private functionMode: boolean = false;
 
   private constructor() {
   }
@@ -366,6 +367,9 @@ export class FullKeyboardController {
       // Consume the event to avoid inserting "F1".."F12" literal text.
       // TODO: implement real function-key semantics when the framework supports it.
     }
+    else if (kc === 205) { // Fn 切换功能键布局
+      this.toggleFunctionMode();
+    }
     else if (kc === 82) { // MENU
       // no-op
     }
@@ -483,6 +487,17 @@ export class FullKeyboardController {
     if (androidKeyCode === 143) return this.numLock;
     if (androidKeyCode === 116) return this.scrollLock;
     return false;
+  }
+
+  // ---------- Function layout ----------
+
+  public toggleFunctionMode(): void {
+    this.functionMode = !this.functionMode;
+    AppStorage.setOrCreate('functionMode', this.functionMode);
+  }
+
+  public isFunctionMode(): boolean {
+    return this.functionMode;
   }
 
   // ---------- Physical keyboard handling ----------

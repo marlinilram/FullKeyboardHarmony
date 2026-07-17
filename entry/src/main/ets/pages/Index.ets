@@ -1,5 +1,5 @@
 import { keyboardController } from '../model/FullKeyboardController';
-import { KeyDef, KeyRow, PORTRAIT_LAYOUT, LANDSCAPE_LAYOUT } from '../model/KeyData';
+import { KeyDef, KeyRow, PORTRAIT_LAYOUT, LANDSCAPE_LAYOUT, FUNCTION_LAYOUT } from '../model/KeyData';
 
 @Entry
 @Component
@@ -68,7 +68,7 @@ struct Index {
   @Builder
   Keyboard() {
     Column({ space: 2 }) {
-      ForEach(this.isLandscape ? LANDSCAPE_LAYOUT : PORTRAIT_LAYOUT, (row: KeyRow, rowIndex: number) => {
+      ForEach(this.currentLayout(), (row: KeyRow, rowIndex: number) => {
         Row({ space: 2 }) {
           ForEach(row, (key: KeyDef, keyIndex: number) => {
             KeyButton({ keyDef: key })
@@ -83,6 +83,13 @@ struct Index {
     .height('100%')
     .padding(4)
   }
+
+  private currentLayout(): KeyRow[] {
+    if (keyboardController.isFunctionMode()) {
+      return FUNCTION_LAYOUT;
+    }
+    return this.isLandscape ? LANDSCAPE_LAYOUT : PORTRAIT_LAYOUT;
+  }
 }
 
 @Component
@@ -95,11 +102,15 @@ struct KeyButton {
   @StorageLink('capsLock') capsLock: boolean = false;
   @StorageLink('numLock') numLock: boolean = false;
   @StorageLink('scrollLock') scrollLock: boolean = false;
+  @StorageLink('functionMode') functionMode: boolean = false;
   @State pressed: boolean = false;
 
   private repeatTimer: number = -1;
 
   private isActive(): boolean {
+    if (this.keyDef.keyCode === 205) { // Fn
+      return this.functionMode;
+    }
     if (this.keyDef.type === 'modifier') {
       const code = this.keyDef.keyCode;
       if (code === 113 || code === 114) return this.ctrlActive;
@@ -119,6 +130,9 @@ struct KeyButton {
   }
 
   private isModifierOrLockActive(): boolean {
+    if (this.keyDef.keyCode === 205) {
+      return this.functionMode;
+    }
     return (this.keyDef.type === 'modifier' || this.keyDef.type === 'lock') && this.isActive();
   }
 
